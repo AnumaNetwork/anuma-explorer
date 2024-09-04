@@ -44,7 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 const socket = io("wss://api.anuma.network", {
-    path: '/ws/socket.io'
+    path: '/ws/socket.io',
+    transports: ['websocket'],
 });
 
 function App() {
