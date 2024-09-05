@@ -7,3 +7,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Development
 
 For developing this you need Node.JS and just npm install.
+
+## Any ideas?
+
+Do you have any new ideas, wishes or bugs? Contact @lAmeR^#7173 at Discord.
+
+## DONATION ♥
+
+Please consider a donation for my work: [anumatest:qqkqkzjvr7zwxxmjxjkmxxdwju9kjs6e9u82uh59z07vgaks6gg62v8707g73](https://explorer.anuma.network/addresses/anumatest:qqkqkzjvr7zwxxmjxjkmxxdwju9kjs6e9u82uh59z07vgaks6gg62v8707g73)

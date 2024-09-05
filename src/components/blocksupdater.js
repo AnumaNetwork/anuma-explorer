@@ -2,7 +2,7 @@ let queryBlock = null
 let blocksCache = []
 
 function updateQueryBlockFromBlockDag() {
-    fetch('https://api.anuma.network/info/blockdag')
+    fetch('https://testnet-api.anuma.network/info/blockdag')
         .then((response) => response.json())
         .then(d => {
             queryBlock = d.virtualParentHashes[0]
@@ -23,7 +23,7 @@ export function getNewBlocks(func, trimTo) {
         updateQueryBlockFromBlockDag()
     }
     if (queryBlock) {
-        fetch(`https://api.anuma.network/blocks?lowHash=${queryBlock}&includeBlocks=true`)
+        fetch(`https://testnet-api.anuma.network/blocks?lowHash=${queryBlock}&includeBlocks=true`)
             .then((response) => response.json())
             .then(d => {
                 const blocks = d.blocks.map((x) => {
@@ -38,7 +38,7 @@ export function getNewBlocks(func, trimTo) {
 
                 blocksCache = blocksCache.concat(blocks)
                 blocksCache = uniqBy(blocksCache, (x) => x.hash)
-                blocksCache.sort((a, b) => b.blueScore - a.blueScore)
+                blocksCache.sort((a,b) => b.blueScore - a.blueScore)
                 blocksCache = blocksCache.splice(0, trimTo)
 
 

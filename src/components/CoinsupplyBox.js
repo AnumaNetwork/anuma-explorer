@@ -1,9 +1,10 @@
-import {faCoins} from '@fortawesome/free-solid-svg-icons';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { faCoins } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
-import {useEffect, useState} from "react";
-import {numberWithCommas} from "../helper";
-import {getCoinSupply, getHalving} from '../anuma-api-client';
+import { useContext, useEffect, useState } from "react";
+import { numberWithCommas } from "../helper";
+import { getCoinSupply, getHalving } from '../anuma-api-client';
+import PriceContext from "./PriceContext";
 
 
 const CBox = () => {
@@ -13,35 +14,15 @@ const CBox = () => {
     const [halvingAmount, setHalvingAmount] = useState("-");
 
     const initBox = async () => {
-        if (localStorage.getItem("cacheCircCoins")) {
-            setCircCoins(localStorage.getItem("cacheCircCoins"))
-        }
-
-        if (localStorage.getItem("cacheBlockReward")) {
-            setBlockReward(localStorage.getItem("cacheBlockReward"))
-        }
-
-        if (localStorage.getItem("cacheHalvingDate")) {
-            setHalvingDate(localStorage.getItem("cacheHalvingDate"))
-        }
-
-        if (localStorage.getItem("cacheHalvingAmount")) {
-            setHalvingAmount(localStorage.getItem("cacheHalvingAmount"))
-        }
-
-
         const coinSupplyResp = await getCoinSupply()
         getBlockReward();
 
         getHalving().then((d) => {
             setHalvingDate(moment(d.nextHalvingTimestamp * 1000).format("YYYY-MM-DD HH:mm"))
             setHalvingAmount(d.nextHalvingAmount.toFixed(2))
-            localStorage.setItem("cacheHalvingDate", moment(d.nextHalvingTimestamp * 1000).format("YYYY-MM-DD HH:mm"))
-            localStorage.setItem("cacheHalvingAmount", d.nextHalvingAmount.toFixed(2))
         })
 
         setCircCoins(Math.round(coinSupplyResp.circulatingSupply / 100000000))
-        localStorage.setItem("cacheCircCoins", Math.round(coinSupplyResp.circulatingSupply / 100000000))
     }
 
     useEffect(() => {
@@ -61,11 +42,10 @@ const CBox = () => {
     }, [])
 
     async function getBlockReward() {
-        await fetch('https://api.anuma.network/info/blockreward')
+        await fetch('https://testnet-api.anuma.network/info/blockreward')
             .then((response) => response.json())
             .then(d => {
                 setBlockReward(d.blockreward.toFixed(2))
-                localStorage.setItem("cacheBlockReward", d.blockreward.toFixed(2))
 
             })
             .catch(err => console.log("Error", err))
@@ -75,9 +55,9 @@ const CBox = () => {
     useEffect(() => {
         document.getElementById('coins').animate([
             // keyframes
-            {opacity: '1'},
-            {opacity: '0.6'},
-            {opacity: '1'},
+            { opacity: '1' },
+            { opacity: '0.6' },
+            { opacity: '1' },
         ], {
             // timing options
             duration: 300
@@ -87,11 +67,11 @@ const CBox = () => {
 
     return <>
         <div className="cardBox mx-0">
-            <table style={{fontSize: "1rem"}}>
+            <table style={{ fontSize: "1rem" }}>
                 <tr>
-                    <td colspan='2' className="text-center" style={{"fontSize": "4rem"}}>
-                        <FontAwesomeIcon icon={faCoins}/>
-                        <div id="light1" className="cardLight"/>
+                    <td colspan='2' className="text-center" style={{ "fontSize": "4rem" }}>
+                        <FontAwesomeIcon icon={faCoins} />
+                        <div id="light1" className="cardLight" />
                     </td>
                 </tr>
                 <tr>
@@ -101,8 +81,7 @@ const CBox = () => {
                 </tr>
                 <tr>
                     <td className="cardBoxElement align-top">
-                        Total
-                    </td>
+                        Total</td>
                     <td className="">
                         <div id="coins">{numberWithCommas(circCoins)} ANUM
                         </div>
@@ -110,14 +89,14 @@ const CBox = () => {
                 </tr>
                 <tr>
                     <td className="cardBoxElement align-top">Max <span className="approx">(approx.)</span></td>
-                    <td className="pt-1">500,000,000 ANUM</td>
+                    <td className="pt-1">500,000,000 ANUM</td>
                 </tr>
                 <tr>
                     <td className="cardBoxElement align-top">Mined</td>
                     <td className="pt-1">{(circCoins / 500000000 * 100).toFixed(2)} %</td>
                 </tr>
                 <tr>
-                    <td className="cardBoxElement align-top">Block reward</td>
+                    <td className="cardBoxElement align-top">Block reward</td>
                     <td className="pt-1">{blockReward} ANUM</td>
                 </tr>
                 <tr>
@@ -128,10 +107,7 @@ const CBox = () => {
                             </span>
                         </OverlayTrigger> */}
                     </td>
-                    <td className="pt-1">{halvingDate}<br/>
-                        <div className="text-end w-100 pe-3 pt-1" style={{fontSize: "small"}}>to {halvingAmount} ANUM
-                        </div>
-                    </td>
+                    <td className="pt-1">{halvingDate}<br /><div className="text-end w-100 pe-3 pt-1" style={{ fontSize: "small" }}>to {halvingAmount} ANUM</div></td>
                 </tr>
             </table>
         </div>
