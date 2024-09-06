@@ -1,4 +1,4 @@
-const API_BASE = "https://testnet-api.anuma.network/"
+const API_BASE = "https://mainnet-api.anuma.network/"
 
 export async function getBlock(hash) {
     const res = await fetch(`${API_BASE}blocks/${hash}?includeColor=true`, { headers: { 'Access-Control-Allow-Origin': '*' } })

@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-const socket = io("wss://testnet-socket.anuma.network", {
+const socket = io("wss://mainnet-socket.anuma.network", {
   path: '/ws/socket.io',
   transports: ['websocket'],
 });
@@ -81,7 +81,7 @@ function App() {
         console.log("hier")
       })
     }
-    if (v.startsWith("anumatest:") || v.startsWith("anumatest:")) {
+    if (v.startsWith("anuma:") || v.startsWith("anuma:")) {
       navigate(`/addresses/${v}`)
     }
 
@@ -89,7 +89,7 @@ function App() {
   }
 
   const updatePrice = () => {
-    fetch(`https://testnet-api.anuma.network/info/market-data`, {
+    fetch(`https://mainnet-api.anuma.network/info/market-data`, {
       headers: { "Cache-Control": "no-cache" }
     })
       .then(response => response.json())
@@ -163,7 +163,7 @@ function App() {
                     <Link to="/">
                       <div className="navbar-brand">
                         <img className="shake" src="/k-icon-glow.png" style={{ "marginRight": ".5rem", width: "4rem", height: "4rem" }} />
-                        <div className="navbar-brand-text text-start">ANUMA TESTNET<br />EXPLORER</div>
+                        <div className="navbar-brand-text text-start">ANUMA<br />EXPLORER</div>
                       </div>
                     </Link>
                   </Navbar.Brand>
@@ -185,7 +185,7 @@ function App() {
                 <Row><Col xs={12}>
                   <Form onSubmit={search} className="">
                     <InputGroup className="mt-4 mb-4 search-box-group">
-                      <Form.Control className="d-inline-block bg-light text-dark shadow-none" name="searchbox" id="search-box-high" type="text" placeholder="Search for anumatest:address or block" />
+                      <Form.Control className="d-inline-block bg-light text-dark shadow-none" name="searchbox" id="search-box-high" type="text" placeholder="Search for anuma:address or block" />
                       <Button type="submit" className="shadow-none searchButton" variant="dark"><i className='fa fa-search' /></Button>
                     </InputGroup>
                   </Form>
@@ -214,10 +214,10 @@ function App() {
                       <a className="blockinfo-link" href="https://github.com/AnumaNetwork/anuma-explorer" target="_blank"><FaGithub size="1.3rem" /></a>
                     </OverlayTrigger>
                     <OverlayTrigger placement="right" overlay={<Tooltip id="donate">Donation address</Tooltip>}>
-                      <Link className="blockinfo-link ms-3" to="/addresses/anumatest:qqkqkzjvr7zwxxmjxjkmxxdwju9kjs6e9u82uh59z07vgaks6gg62v8707g73"><BiDonateHeart size="1.3rem" /></Link>
+                      <Link className="blockinfo-link ms-3" to="/addresses/anuma:qqkqkzjvr7zwxxmjxjkmxxdwju9kjs6e9u82uh59z07vgaks6gg62v8707g73"><BiDonateHeart size="1.3rem" /></Link>
                     </OverlayTrigger>
                     <OverlayTrigger placement="right" overlay={<Tooltip id="github">REST-API server</Tooltip>}>
-                      <a className="blockinfo-link ms-3" href="https://testnet-api.anuma.network/" target="_blank"><SiFastapi size="1.3rem" /></a>
+                      <a className="blockinfo-link ms-3" href="https://mainnet-api.anuma.network/" target="_blank"><SiFastapi size="1.3rem" /></a>
                     </OverlayTrigger>
                   </span>
                   <span className="px-3 build">|</span>
@@ -236,10 +236,10 @@ function App() {
                       <a className="blockinfo-link" href="https://github.com/AnumaNetwork/anuma-explorer" target="_blank"><FaGithub size="1.1rem" /></a>
                     </OverlayTrigger>
                     <OverlayTrigger placement="right" overlay={<Tooltip id="donate">Donation address</Tooltip>}>
-                      <Link className="blockinfo-link ms-2" to="/addresses/anumatest:qqkqkzjvr7zwxxmjxjkmxxdwju9kjs6e9u82uh59z07vgaks6gg62v8707g73"><BiDonateHeart size="1.1rem" /></Link>
+                      <Link className="blockinfo-link ms-2" to="/addresses/anuma:qqkqkzjvr7zwxxmjxjkmxxdwju9kjs6e9u82uh59z07vgaks6gg62v8707g73"><BiDonateHeart size="1.1rem" /></Link>
                     </OverlayTrigger>
                     <OverlayTrigger placement="right" overlay={<Tooltip id="github">REST-API server</Tooltip>}>
-                      <a className="blockinfo-link ms-2" href="https://testnet-api.anuma.network/" target="_blank"><SiFastapi size="1.1rem" /></a>
+                      <a className="blockinfo-link ms-2" href="https://mainnet-api.anuma.network/" target="_blank"><SiFastapi size="1.1rem" /></a>
                     </OverlayTrigger>
                   </span>
                 </Col>

@@ -9,7 +9,7 @@ const AnumadInfoBox = () => {
     const [data, setData] = useState({});
 
     async function updateData() {
-        await fetch('https://testnet-api.anuma.network/info/anumad')
+        await fetch('https://mainnet-api.anuma.network/info/anumad')
             .then((response) => response.json())
             .then(d => setData(d))
             .catch(err => console.log("Error", err))
